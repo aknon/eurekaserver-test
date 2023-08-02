@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: eureka
+  #security:
+  #  user:
+  #    name: nitesh
+  #    password: nitesh
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics
+
+server:
+  port: 8900
+  servlet:
+    contextPath: /eurekaserver
+
+eureka:
+  server:
+    enable-self-preservation: true
+    expected-client-renewal-interval-seconds: 30
+
+  instance:
+    hostname: localhost
+    lease-expiration-duration-in-seconds: 60
+    #statusPageUrlPath: ${server.servlet.contextPath}/actuator/info
+    #healthCheckUrlPath: ${server.servlet.contextPath}/actuator/health
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eurekaserver/eureka/
+    healthcheck:
+      enabled: true
+
+logging:
+  level:
+    com:
+      netflix:
+        eureka: OFF
+        discovery: OFF
+
+
+
+
+
+
+
+
